@@ -48,6 +48,9 @@ export default function SignIn(props) {
 	const classes = useStyles();
   const [disabled, toggleDisabled] = useState(true);
   const [string, setString] = useState('');
+  // 日本語変換に対応する。日本語入力で変換が完了したら、isComposingJapaneseをtrueにする
+  const [isComposingJapanese, setIsComposingJapanese] = useState(false);
+  console.log(isComposingJapanese);
 
   //ニックネーム入力欄に文字が記入されていたら、buttonコンポーネントのdisabledをfalseにする
   useEffect(() => {
@@ -55,7 +58,7 @@ export default function SignIn(props) {
     const disabled = string === "";
     //setStateでButtonコンポーネントに渡すdisabledをsettingする
     toggleDisabled(disabled);
-    console.log(disabled, string)
+    // console.log(disabled, string)
 
   },[string])
 
@@ -78,11 +81,21 @@ export default function SignIn(props) {
 						autoFocus
             onChange={(e) => setString(e.target.value)}
             onKeyDown={(e) => {
-              if(e.key === 'Enter'){
+              // if(isComposingJapanese)return;//日本語入力を変換中だったら、Enterが押されても、この次の動作に行かないようにreturnする
+              if(e.key === 'Enter' && !isComposingJapanese){
                 props.setName(e.target.value);
                 e.preventDefault()//リクエストをキャンセル
               }
               //変換の時にEnterKeyを押すと、App.jsから渡ってきた、setNameをしてしまう。=>日本語変換を確定した段階でニックネームを確定してしまう
+            }}
+            //日本語変換に対応する
+            onCompositionStart={() => {
+              console.log('日本語入力をスタートしました。')
+              setIsComposingJapanese(true);
+            }}
+            onCompositionEnd={() => {
+              console.log('日本語入力が終了しました。')
+              setIsComposingJapanese(false);
             }}
 					/>
 					<Button
