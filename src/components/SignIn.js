@@ -85,6 +85,7 @@ export default function SignIn(props) {
 						color="primary"
 						className={classes.submit}
             disabled={disabled}
+            onClick={() => props.setName(string)}
 					>
 						はじめる
 					</Button>
