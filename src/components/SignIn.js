@@ -77,9 +77,16 @@ export default function SignIn(props) {
 						name="name"
 						autoFocus
             onChange={(e) => setString(e.target.value)}
+            onKeyDown={(e) => {
+              if(e.key === 'Enter'){
+                props.setName(e.target.value);
+                e.preventDefault()//リクエストをキャンセル
+              }
+              //変換の時にEnterKeyを押すと、App.jsから渡ってきた、setNameをしてしまう。=>日本語変換を確定した段階でニックネームを確定してしまう
+            }}
 					/>
 					<Button
-						type="submit"
+						type="button"
 						fullWidth
 						variant="contained"
 						color="primary"
