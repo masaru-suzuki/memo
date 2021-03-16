@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { TextField } from '@material-ui/core'
 import { pushMessagesToFirebase } from '../firebase'
 
-const MessageField = ({ name, message, setMessage, initMessage }) => {
+const MessageField = ({ name, message, setMessage, initMessage, inputEl }) => {
   // 日本語変換に対応する。日本語入力で変換が完了したら、isComposingJapaneseをtrueにする
   const [isComposingJapanese, setIsComposingJapanese] = useState(false)
 
@@ -15,12 +15,15 @@ const MessageField = ({ name, message, setMessage, initMessage }) => {
       name="name"
       autoFocus
       value={message}
+      //フォーカスされるようにrefを設定
+      inputRef={inputEl}
       onChange={(e) => setMessage(e.target.value)}
       onKeyDown={(e) => {
         //Enterを押したらfirebaseに登録したい
         //textfieldのmessageを初期化
         //日本語編集完了の時のEnterでは登録しない
         //メッセージを入力していない時のEnterでは登録しない
+
         /**
          * この書き方もあり
          * const text = e.target.value

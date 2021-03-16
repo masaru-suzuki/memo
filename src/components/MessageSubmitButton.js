@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import { pushMessagesToFirebase } from '../firebase'
 
-const MessageSubmitButton = ({name, message, initMessage }) => {
+const MessageSubmitButton = ({name, message, initMessage,inputEl }) => {
 
   //ボタンがクリックされたら、情報をfirebaseに登録する
   return(
@@ -16,6 +16,8 @@ const MessageSubmitButton = ({name, message, initMessage }) => {
       onClick={()=>{
         pushMessagesToFirebase(name,message)
         initMessage()
+        //inpu feildにフォーカスを当てる
+        inputEl.current.focus()
       }}
     >
       Send

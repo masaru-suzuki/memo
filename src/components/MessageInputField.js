@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Avatar } from '@material-ui/core'
 import { gravatarPath } from '../gravatar'
@@ -14,6 +14,9 @@ const useStyles = makeStyles({
 const MessageInputField = ({ name }) => {
   const [message, setMessage] = useState('')
   // console.log(message)
+  //ボタンにフォーカスを当てるために該当するelementを取得する
+  const inputEl = useRef(null);
+
 
   //ボタンを押した時とtextfieldでenterを押した時にtextfieldないのメッセージを初期化する
   const initMessage = () => {
@@ -37,6 +40,7 @@ const MessageInputField = ({ name }) => {
             message={message}
             setMessage={setMessage}
             initMessage={initMessage}
+            inputEl={inputEl}
           />
         </Grid>
         <Grid item xs={1}>
@@ -45,6 +49,7 @@ const MessageInputField = ({ name }) => {
             message={message}
             setMessage={setMessage}
             initMessage={initMessage}
+            inputEl={inputEl}
           />
         </Grid>
       </Grid>
