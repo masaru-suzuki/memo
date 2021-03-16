@@ -29,7 +29,7 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 //保存先の指定（保存名の指定）
-const messagesRef = database.ref('messages')
+export const messagesRef = database.ref('messages')
 
 export const pushMessagesToFirebase = (name, text) => {
   messagesRef.push({
