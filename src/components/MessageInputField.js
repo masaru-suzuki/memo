@@ -28,6 +28,7 @@ const MessageInputField = ({ name }) => {
       <Grid container xs={12}>
         <Grid item xs={1}>
           <Avatar alt="avatar" src={avatarPath} />
+          {/* アバター画像を好きな画像に変更できるようにしたい */}
         </Grid>
         <Grid item xs={10}>
           <MessageField

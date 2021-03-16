@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { TextField } from '@material-ui/core'
+import { pushMessagesToFirebase } from '../firebase'
 
 const MessageField = ({ name, message, setMessage, initMessage }) => {
   // 日本語変換に対応する。日本語入力で変換が完了したら、isComposingJapaneseをtrueにする
@@ -28,7 +29,8 @@ const MessageField = ({ name, message, setMessage, initMessage }) => {
          * ~~~~~~~
          */
         if (e.key === 'Enter' && !isComposingJapanese && message !== '') {
-          console.log('push message to firebase')
+          pushMessagesToFirebase(name,message)
+          // console.log('finish push message to firebase')
           initMessage()
           e.preventDefault() //リクエストをキャンセル
         }
