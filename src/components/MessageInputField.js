@@ -25,7 +25,7 @@ const MessageInputField = ({ name }) => {
   const avatarPath = gravatarPath(name)
   return (
     <div className={classes.root}>
-      <Grid container xs={12}>
+      <Grid container>
         <Grid item xs={1}>
           <Avatar alt="avatar" src={avatarPath} />
           {/* アバター画像を好きな画像に変更できるようにしたい */}
