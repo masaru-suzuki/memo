@@ -21,7 +21,7 @@ const MessageInputField = ({ name }) => {
   //ボタンを押した時とtextfieldでenterを押した時にtextfieldないのメッセージを初期化する
   const initMessage = () => {
     setMessage('')
-    console.log('message clear')
+    // console.log('message clear')
   }
 
   // console.log(name)

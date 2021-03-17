@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import {List} from '@material-ui/core';
 import { messagesRef } from '../firebase'
+import MessageItem from "./MessageItem.js";
 
 
 
@@ -9,17 +11,19 @@ import { messagesRef } from '../firebase'
 const useStyles = makeStyles({
   root: {
     gridRow: 1,
+    width:'100%',
+    overflow:'auto'
   },
 })
 const MessageList = () => {
   const classes = useStyles()
-  const [messages, setMessages] = useState()
+  const [messages, setMessages] = useState([])
+      // console.log(messages
 
   useEffect(() => {
-    console.log('useEffect')
     messagesRef
     .orderByKey()
-    .limitToLast(3)
+    .limitToLast(10)
     .on("value", (snapshot) => {
       const messages = snapshot.val();
       //メッセージが一件もない場合の処理
@@ -30,12 +34,13 @@ const MessageList = () => {
 
       const newMessages = entries.map((entry) => {
         const [key, nameAndMessage]= entry
-        return {key, ...nameAndMessage}
+        return { key, ...nameAndMessage }
       })
-
+      // console.log(newMessages)
       setMessages(newMessages);
     });
   },[])
+      // console.log(messages)
 
 // // Attach an asynchronous callback to read the data at our posts reference
 // messagesRef
@@ -86,8 +91,19 @@ const MessageList = () => {
 
 // });
 
-
-  return <div className={classes.root}>{messagesRef[0]}</div>
+  return (
+    <List className={classes.root}>
+      {messages.map(({key, message, name}) => {
+        return (
+          <MessageItem
+            key={key}
+            name={name}
+            message={message}
+          />
+        )
+      })}
+    </List>
+  )
 }
 
 export default MessageList
