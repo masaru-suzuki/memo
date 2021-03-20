@@ -50,7 +50,7 @@ export default function SignIn(props) {
   const [string, setString] = useState('')
   // 日本語変換に対応する。日本語入力で変換が完了したら、isComposingJapaneseをtrueにする
   const [isComposingJapanese, setIsComposingJapanese] = useState(false)
-  console.log(isComposingJapanese)
+  // console.log(isComposingJapanese)
 
   //ニックネーム入力欄に文字が記入されていたら、buttonコンポーネントのdisabledをfalseにする
   useEffect(() => {
@@ -89,11 +89,11 @@ export default function SignIn(props) {
             }}
             //日本語変換に対応する
             onCompositionStart={() => {
-              console.log('日本語入力をスタートしました。')
+              // console.log('日本語入力をスタートしました。')
               setIsComposingJapanese(true)
             }}
             onCompositionEnd={() => {
-              console.log('日本語入力が終了しました。')
+              // console.log('日本語入力が終了しました。')
               setIsComposingJapanese(false)
             }}
           />

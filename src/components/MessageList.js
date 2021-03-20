@@ -88,17 +88,21 @@ const MessageList = () => {
 // setMessages(newMessages) //これだけだとinfinitrool
 // //メッセージが更新された時に一度だけメッセージを取得する => useEffectで第二引数に[]
 
-
 // });
+
+  //最後の要素にスクロール 最新の投稿を判定
+  const messageLength = messages.length
 
   return (
     <List className={classes.root}>
-      {messages.map(({key, message, name}) => {
+      {messages.map(({key, message, name}, index) => {
+        const isLastMessage = messageLength === index+1
         return (
           <MessageItem
             key={key}
             name={name}
             message={message}
+            isLastMessage={isLastMessage}
           />
         )
       })}
